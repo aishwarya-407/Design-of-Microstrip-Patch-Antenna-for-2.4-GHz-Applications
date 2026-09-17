@@ -1,0 +1,2 @@
+# Design-of-Microstrip-Patch-Antenna-for-2.4-GHz-Applications
+Designed and simulated a rectangular microstrip patch antenna for 2.4 GHz wireless communication applications using ANSYS HFSS. The project includes antenna dimension calculations, 50 Ω microstrip feed design, impedance matching, parameter optimization, and analysis of S11, VSWR, gain, directivity, efficiency, bandwidth, and radiation pattern.
