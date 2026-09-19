@@ -1,0 +1,34 @@
+%% Input Parameters
+f = 2.4e9;          % Frequency = 2.4 GHz
+c = 3e8;            % Speed of light
+er = 4.4;           % Dielectric constant
+h = 1.6e-3;         % Substrate height = 1.6 mm
+%% Patch Width
+W = (c/(2*f))*sqrt(2/(er+1));
+%% Effective Dielectric Constant
+ereff = (er+1)/2 + (er-1)/2 * ...
+        (1 + 12*h/W)^(-0.5);
+%% Effective Patch Length
+Leff = c/(2*f*sqrt(ereff));
+%% Fringing Length Extension
+deltaL = 0.412*h * ...
+    ((ereff+0.3)*(W/h+0.264)) / ...
+    ((ereff-0.258)*(W/h+0.8));
+%% Actual Patch Length
+L = Leff - 2*deltaL;
+%% Substrate Dimensions
+Ws = W + 6*h;
+Ls = L + 6*h;
+%% 50 Ohm Feed Width
+Z0 = 50;
+A = (Z0/60)*sqrt((er+1)/2) + ...
+    ((er-1)/(er+1))*(0.23 + 0.11/er);
+Wf_h = (8*exp(A))/(exp(2*A)-2);
+Wf = Wf_h*h;
+%% Display Results in mm
+fprintf('Patch Width (W)       = %.3f mm\n', W*1000);
+fprintf('Patch Length (L)      = %.3f mm\n', L*1000);
+fprintf('Substrate Width (Ws)  = %.3f mm\n', Ws*1000);
+fprintf('Substrate Length (Ls) = %.3f mm\n', Ls*1000);
+fprintf('Feed Width (Wf)       = %.3f mm\n', Wf*1000);
+fprintf('Effective Er          = %.3f\n', ereff);
